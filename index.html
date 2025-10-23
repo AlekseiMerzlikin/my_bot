@@ -21,83 +21,92 @@
       font-family: 'Montserrat', sans-serif;
       background: var(--bg-color);
       color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
     }
-    .menu {
-      width: 100%;
+    #menuContainer, #detailContainer {
       max-width: 500px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      margin: 0 auto;
     }
-    .case-button {
+    .case-item {
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 16px 20px;
-      text-decoration: none;
-      color: var(--text-color);
-      transition: background 0.2s;
-      display: block;
+      padding: 20px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .case-button h3 {
-      margin: 0 0 6px 0;
+    .case-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    h2 {
+      margin: 0 0 5px;
       font-size: 20px;
     }
-    .case-button p {
+    p {
       margin: 0;
-      font-size: 14px;
       color: var(--subtext-color);
     }
-    .case-button:hover {
-      background: #1f2630;
+    .back-button {
+      margin-top: 20px;
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="menu" id="menuContainer"></div>
+  <div id="menuContainer"></div>
+  <div id="detailContainer" style="display:none;"></div>
+
   <script>
+    // apply Telegram theme if available
     function applyTelegramTheme() {
-      if (window.Telegram && Telegram.WebApp && Telegram.WebApp.themeParams) {
-        const params = Telegram.WebApp.themeParams;
-        if (params.bg_color) document.documentElement.style.setProperty('--bg-color', '#' + params.bg_color);
-        if (params.secondary_bg_color) document.documentElement.style.setProperty('--card-bg', '#' + params.secondary_bg_color);
-        if (params.button_color) document.documentElement.style.setProperty('--accent', '#' + params.button_color);
-        if (params.text_color) document.documentElement.style.setProperty('--text-color', '#' + params.text_color);
-        if (params.hint_color) document.documentElement.style.setProperty('--subtext-color', '#' + params.hint_color);
+      if (window?.Telegram?.WebApp?.themeParams) {
+        const tp = window.Telegram.WebApp.themeParams;
+        if (tp.bg_color) document.documentElement.style.setProperty('--bg-color', '#' + tp.bg_color);
+        if (tp.secondary_bg_color) document.documentElement.style.setProperty('--card-bg', '#' + tp.secondary_bg_color);
+        if (tp.button_color) document.documentElement.style.setProperty('--accent', '#' + tp.button_color);
+        if (tp.text_color) document.documentElement.style.setProperty('--text-color', '#' + tp.text_color);
+        if (tp.hint_color) document.documentElement.style.setProperty('--subtext-color', '#' + tp.hint_color);
       }
     }
     applyTelegramTheme();
+
     const cases = [
-      {
-        title: "Чат-бот Платный клуб",
-        description: "Платный вход и рекуррентные платежи.",
-        link: "https://project10807905.tilda.ws/case1"
-      },
-      {
-        title: "Чат-бот Таролога",
-        description: "Более 10000 пользователей на выдачу лид-магнита.",
-        link: "https://project10807905.tilda.ws/case2"
-      },
-      {
-        title: "Чат-бот Авто вебинар",
-        description: "Автоматические рассылки, прогрев аудитории.",
-        link: "https://project10807905.tilda.ws/case2"
-      },
-      {
-        title: "Чат-бот Репетитор по литературе",
-        description: "Чат бот с системой ИИ.",
-        link: "https://project10807905.tilda.ws/case3"
-      }
+      { title: "Чат-бот Платный клуб", description: "Платный вход и рекуррентные платежи." },
+      { title: "Чат-бот Таролога", description: "Более 10000 пользователей на выдачу лид-магнита." },
+      { title: "Чат-бот Авто вебинар", description: "Автоматические рассылки, прогрев аудитории." },
+      { title: "Чат-бот Репетитор по литературе", description: "Чат бот с системой ИИ." }
     ];
-    const container = document.getElementById('menuContainer');
-    container.innerHTML = cases.map(c => `
-      <a class="case-button" href="${c.link}" target="_blank">
-        <h3>${c.title}</h3>
-        <p>${c.description}</p>
-      </a>
-    `).join('');
+
+    const menuContainer = document.getElementById('menuContainer');
+    const detailContainer = document.getElementById('detailContainer');
+
+    function renderMenu() {
+      menuContainer.innerHTML = '';
+      cases.forEach((c, index) => {
+        const div = document.createElement('div');
+        div.className = 'case-item';
+        div.innerHTML = '<h2>' + c.title + '</h2><p>' + c.description + '</p>';
+        div.addEventListener('click', () => showCase(index));
+        menuContainer.appendChild(div);
+      });
+      menuContainer.style.display = 'block';
+      detailContainer.style.display = 'none';
+    }
+
+    function showCase(index) {
+      const c = cases[index];
+      detailContainer.innerHTML = '<h2>' + c.title + '</h2><p>' + c.description + '</p><div class="back-button" onclick="renderMenu()">Назад к кейсам</div>';
+      menuContainer.style.display = 'none';
+      detailContainer.style.display = 'block';
+    }
+
+    renderMenu();
   </script>
 </body>
 </html>
