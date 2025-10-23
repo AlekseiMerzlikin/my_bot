@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио кейсов</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: #0d1117;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .swiper {
+      width: 90%;
+      max-width: 400px;
+      height: 90vh;
+    }
+    .swiper-slide {
+      background: #161b22;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .swiper-slide img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 15px;
+    }
+    h3 {
+      font-size: 20px;
+      margin: 10px 0;
+      text-align: center;
+    }
+    p {
+      font-size: 14px;
+      color: #ccc;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    a {
+      background: #0078ff;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    a:hover {
+      background: #005fcc;
+    }
+    .swiper-pagination-bullet {
+      background: #fff !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="swiper">
+    <div class="swiper-wrapper" id="casesContainer"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <script>
+    const cases = [
+      {
+        title: "Лендинг для стартапа",
+        image: "https://static.tildacdn.com/tild6535-6266-4633-b834-633865666234/startup_landing.jpg",
+        description: "Минималистичный лендинг с адаптивом и анимацией.",
+        link: "https://example.tilda.ws/startup"
+      },
+      {
+        title: "Интернет-магазин аксессуаров",
+        image: "https://static.tildacdn.com/tild3862-3837-4238-b536-383433346466/shop_case.jpg",
+        description: "Каталог товаров с корзиной и оплатой онлайн.",
+        link: "https://example.tilda.ws/shop"
+      },
+      {
+        title: "Промо-сайт мероприятия",
+        image: "https://static.tildacdn.com/tild6666-6164-4438-a532-386434366665/event_case.jpg",
+        description: "Яркий сайт с таймером и формой регистрации.",
+        link: "https://example.tilda.ws/event"
+      }
+    ];
+    const container = document.getElementById("casesContainer");
+    container.innerHTML = cases.map(c => `
+      <div class="swiper-slide">
+        <img src="${c.image}" alt="${c.title}">
+        <h3>${c.title}</h3>
+        <p>${c.description}</p>
+        <a href="${c.link}" target="_blank">Смотреть проект</a>
+      </div>
+    `).join('');
+    new Swiper('.swiper', {
+      direction: 'horizontal',
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+  </script>
+</body>
+</html>
