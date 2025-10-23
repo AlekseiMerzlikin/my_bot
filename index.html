@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Портфолио кейсов</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
     body {
       margin: 0;
       padding: 20px;
-      font-family: "Montserrat", sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: var(--bg-color);
       color: var(--text-color);
       display: flex;
@@ -31,42 +31,41 @@
     .swiper {
       width: 100%;
       max-width: 500px;
-      height: auto;
     }
     .swiper-slide {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s;
     }
     .swiper-slide:hover {
       transform: translateY(-5px);
     }
     .swiper-slide img {
       width: 100%;
-      height: 250px;
+      height: 230px;
       object-fit: cover;
       border-radius: 16px;
       margin-bottom: 15px;
     }
     h3 {
       font-size: 22px;
-      margin: 10px 0 5px 0;
+      margin: 10px 0;
       text-align: center;
     }
     p {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--subtext-color);
       text-align: center;
-      margin: 0 0 15px 0;
+      margin-bottom: 20px;
     }
     a {
       background: var(--accent);
-      color: #fff;
+      color: white;
       text-decoration: none;
       padding: 10px 20px;
       border-radius: 8px;
@@ -76,7 +75,7 @@
       background: #005fcc;
     }
     .swiper-pagination-bullet {
-      background: var(--subtext-color) !important;
+      background: #fff !important;
     }
   </style>
 </head>
@@ -86,40 +85,43 @@
     <div class="swiper-pagination"></div>
   </div>
   <script>
-    // Apply Telegram theme if available (light/dark)
+    // Apply Telegram theme if available
     function applyTelegramTheme() {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        const theme = tg.themeParams;
-        if (theme) {
-          const root = document.documentElement.style;
-          if (theme.bg_color) root.setProperty('--bg-color', '#' + theme.bg_color);
-          if (theme.secondary_bg_color) root.setProperty('--card-bg', '#' + theme.secondary_bg_color);
-          if (theme.button_color) root.setProperty('--accent', '#' + theme.button_color);
-          if (theme.text_color) root.setProperty('--text-color', '#' + theme.text_color);
-          if (theme.hint_color) root.setProperty('--subtext-color', '#' + theme.hint_color);
-        }
+      if (window.Telegram && Telegram.WebApp && Telegram.WebApp.themeParams) {
+        const params = Telegram.WebApp.themeParams;
+        if (params.bg_color) document.documentElement.style.setProperty('--bg-color', '#' + params.bg_color);
+        if (params.secondary_bg_color) document.documentElement.style.setProperty('--card-bg', '#' + params.secondary_bg_color);
+        if (params.button_color) document.documentElement.style.setProperty('--accent', '#' + params.button_color);
+        if (params.text_color) document.documentElement.style.setProperty('--text-color', '#' + params.text_color);
+        if (params.hint_color) document.documentElement.style.setProperty('--subtext-color', '#' + params.hint_color);
       }
     }
     applyTelegramTheme();
+    // Cases array from Tilda site
     const cases = [
       {
-        title: "Лендинг для стартапа",
+        title: "Чат-бот Платный клуб",
         image: "https://static.tildacdn.com/tild6535-6266-4633-b834-633865666234/startup_landing.jpg",
-        description: "Минималистичный лендинг с адаптивом и анимацией.",
-        link: "https://example.tilda.ws/startup"
+        description: "Платный вход и рекуррентные платежи.",
+        link: "https://project10807905.tilda.ws/case1"
       },
       {
-        title: "Интернет-магазин аксессуаров",
+        title: "Чат-бот Таролога",
         image: "https://static.tildacdn.com/tild3862-3837-4238-b536-383433346466/shop_case.jpg",
-        description: "Каталог товаров с корзиной и оплатой онлайн.",
-        link: "https://example.tilda.ws/shop"
+        description: "Более 10000 пользователей на выдачу лид-магнита.",
+        link: "https://project10807905.tilda.ws/case2"
       },
       {
-        title: "Промо-сайт мероприятия",
+        title: "Чат-бот Авто вебинар",
+        image: "https://thb.tildacdn.pub/tild6439-3130-4662-b861-663566666638/-/empty/photo.PNG",
+        description: "Автоматические рассылки, прогрев аудитории.",
+        link: "https://project10807905.tilda.ws/case2"
+      },
+      {
+        title: "Чат-бот Репетитор по литературе",
         image: "https://static.tildacdn.com/tild6666-6164-4438-a532-386434366665/event_case.jpg",
-        description: "Яркий сайт с таймером и формой регистрации.",
-        link: "https://example.tilda.ws/event"
+        description: "Чат бот с системой ИИ.",
+        link: "https://project10807905.tilda.ws/case3"
       }
     ];
     const container = document.getElementById("casesContainer");
@@ -134,7 +136,9 @@
     new Swiper('.swiper', {
       direction: 'horizontal',
       loop: true,
-      pagination: { el: '.swiper-pagination' },
+      pagination: {
+        el: '.swiper-pagination',
+      },
     });
   </script>
 </body>
