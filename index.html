@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Портфолио кейсов</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,67 +23,41 @@
       color: var(--text-color);
       display: flex;
       justify-content: center;
-      align-items: center;
       min-height: 100vh;
     }
-    .swiper {
+    .menu {
       width: 100%;
       max-width: 500px;
-    }
-    .swiper-slide {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s;
+      gap: 12px;
     }
-    .swiper-slide:hover {
-      transform: translateY(-5px);
-    }
-    .swiper-slide img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
+    .case-button {
+      background: var(--card-bg);
       border-radius: 16px;
-      margin-bottom: 15px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: background 0.2s;
+      display: block;
     }
-    h3 {
-      font-size: 22px;
-      margin: 10px 0;
-      text-align: center;
+    .case-button h3 {
+      margin: 0 0 6px 0;
+      font-size: 20px;
     }
-    p {
+    .case-button p {
+      margin: 0;
       font-size: 14px;
       color: var(--subtext-color);
-      text-align: center;
-      margin-bottom: 20px;
     }
-    a {
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
-    a:hover {
-      background: #005fcc;
-    }
-    .swiper-pagination-bullet {
-      background: #fff !important;
+    .case-button:hover {
+      background: #1f2630;
     }
   </style>
 </head>
 <body>
-  <div class="swiper">
-    <div class="swiper-wrapper" id="casesContainer"></div>
-    <div class="swiper-pagination"></div>
-  </div>
+  <div class="menu" id="menuContainer"></div>
   <script>
-    // Apply Telegram theme if available
     function applyTelegramTheme() {
       if (window.Telegram && Telegram.WebApp && Telegram.WebApp.themeParams) {
         const params = Telegram.WebApp.themeParams;
@@ -97,49 +69,35 @@
       }
     }
     applyTelegramTheme();
-    // Cases array from Tilda site
     const cases = [
       {
         title: "Чат-бот Платный клуб",
-        image: "https://static.tildacdn.com/tild6535-6266-4633-b834-633865666234/startup_landing.jpg",
         description: "Платный вход и рекуррентные платежи.",
         link: "https://project10807905.tilda.ws/case1"
       },
       {
         title: "Чат-бот Таролога",
-        image: "https://static.tildacdn.com/tild3862-3837-4238-b536-383433346466/shop_case.jpg",
         description: "Более 10000 пользователей на выдачу лид-магнита.",
         link: "https://project10807905.tilda.ws/case2"
       },
       {
         title: "Чат-бот Авто вебинар",
-        image: "https://thb.tildacdn.pub/tild6439-3130-4662-b861-663566666638/-/empty/photo.PNG",
         description: "Автоматические рассылки, прогрев аудитории.",
         link: "https://project10807905.tilda.ws/case2"
       },
       {
         title: "Чат-бот Репетитор по литературе",
-        image: "https://static.tildacdn.com/tild6666-6164-4438-a532-386434366665/event_case.jpg",
         description: "Чат бот с системой ИИ.",
         link: "https://project10807905.tilda.ws/case3"
       }
     ];
-    const container = document.getElementById("casesContainer");
+    const container = document.getElementById('menuContainer');
     container.innerHTML = cases.map(c => `
-      <div class="swiper-slide">
-        <img src="${c.image}" alt="${c.title}">
+      <a class="case-button" href="${c.link}" target="_blank">
         <h3>${c.title}</h3>
         <p>${c.description}</p>
-        <a href="${c.link}" target="_blank">Смотреть проект</a>
-      </div>
+      </a>
     `).join('');
-    new Swiper('.swiper', {
-      direction: 'horizontal',
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-      },
-    });
   </script>
 </body>
 </html>
