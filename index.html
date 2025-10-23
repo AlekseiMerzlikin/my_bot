@@ -64,17 +64,15 @@
   <div class="container" id="menuContainer">
     <h1>Мои кейсы</h1>
     <ul id="caseList"></ul>
-    <!-- Кнопка для заказа бота -->
     <a href="https://t.me/AlenWolker" class="order-btn" target="_blank">Заказать бота</a>
   </div>
   <div class="container detail" id="detailContainer" style="display:none;"></div>
-
   <script>
     const cases = [
       {
         title: "Чат‑бот Платный клуб",
         shortDesc: "Платный вход и рекуррентные платежи.",
-        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=60",
+        image: "https://raw.githubusercontent.com/AlekseiMerzlikin/my_bot/main/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8%20%D0%BA%20%D0%BA%D0%B5%D0%B9%D1%81%D0%B0%D0%BC/%D0%BA%D0%B5%D0%B9%D1%81%201/259b0960-3967-51f9-a%20%E2%80%94%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.png.webp",
         fullHtml: `
           <p><strong>Задача:</strong> автоматизировать оплату клуба и направлять старых участников в воронку, учитывая дату окончания подписки.</p>
           <p><strong>Инсайты:</strong> почти 1000 человек ежемесячно оплачивают клуб и присылают чек вручную; треть оплачивает сразу 3–6 месяцев; каждый месяц создаётся новый канал для платников; используются акции и пробные периоды 3–7 дней; платежи приходят из России и Европы; заказчик хочет иметь возможность быстро менять воронку.</p>
@@ -85,7 +83,7 @@
       {
         title: "Чат‑бот Таролога",
         shortDesc: "Лид‑магнит и база из 10 000+ пользователей.",
-        image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=800&q=60",
+        image: "https://raw.githubusercontent.com/AlekseiMerzlikin/my_bot/main/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8%20%D0%BA%20%D0%BA%D0%B5%D0%B9%D1%81%D0%B0%D0%BC/%D0%BA%D0%B5%D0%B9%D1%81%202/photo.PNG.webp",
         fullHtml: `
           <p><strong>Задача:</strong> собрать базу клиентов и выдать лид‑магнит для услуги таролога.</p>
           <p><strong>Решение:</strong> разработали чат‑бот, который выдаёт бесплатный материал (лид‑магнит), собирает контактные данные и перенаправляет пользователей на консультацию; бот отвечает на частые вопросы по таро и подсказывает, как записаться.</p>
@@ -95,7 +93,7 @@
       {
         title: "Чат‑бот Авто вебинар",
         shortDesc: "Автоматические рассылки для повышения посещаемости.",
-        image: "https://images.unsplash.com/photo-1558889414-b3af4e4f3e8b?auto=format&fit=crop&w=800&q=60",
+        image: "https://raw.githubusercontent.com/AlekseiMerzlikin/my_bot/main/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8%20%D0%BA%20%D0%BA%D0%B5%D0%B9%D1%81%D0%B0%D0%BC/%D0%BA%D0%B5%D0%B9%D1%81%203/photo.png",
         fullHtml: `
           <p><strong>Задача:</strong> увеличить посещаемость авто‑вебинара для психолога.</p>
           <p><strong>Решение:</strong> создали бот на Salebot.pro, который выдаёт лид‑магнит (вебинар), отправляет напоминания за час, за 15 минут до начала, в момент старта и спустя 15 минут, если пользователь не присоединился; бот собирает и передаёт данные в CRM и формирует аналитику.</p>
@@ -105,7 +103,7 @@
       {
         title: "Чат‑бот Репетитор по литературе",
         shortDesc: "Интерактивная подготовка к ЕГЭ по литературе.",
-        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=60",
+        image: "https://raw.githubusercontent.com/AlekseiMerzlikin/my_bot/main/%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8%20%D0%BA%20%D0%BA%D0%B5%D0%B9%D1%81%D0%B0%D0%BC/%D0%BA%D0%B5%D0%B9%D1%81%204/4.png",
         fullHtml: `
           <p><strong>Задача:</strong> создать бота для подготовки учеников к ЕГЭ по литературе, который отправляет задания из Google Sheets в соответствии с изученными темами.</p>
           <p><strong>Решение:</strong> интегрировали бота с Google Sheets для автоматической выгрузки вопросов; реализовали алгоритм проверки ответов, учитывающий особенности русского языка и допускающий вариации; добавили ИИ‑ассистента, который общается со студентами, задаёт дополнительные вопросы и помогает глубже понять материал.</p>
@@ -115,7 +113,6 @@
     ];
 
     const listEl = document.getElementById('caseList');
-
     cases.forEach((c, index) => {
       const li = document.createElement('li');
       li.textContent = `${c.title} — ${c.shortDesc}`;
@@ -144,4 +141,3 @@
   </script>
 </body>
 </html>
-
