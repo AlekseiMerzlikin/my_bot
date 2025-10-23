@@ -95,6 +95,7 @@
     const container = document.getElementById("casesContainer");
     container.innerHTML = cases.map(c => `
       <div class="swiper-slide">
+<!-- build trigger -->
         <img src="${c.image}" alt="${c.title}">
         <h3>${c.title}</h3>
         <p>${c.description}</p>
