@@ -41,18 +41,22 @@
       border-radius: 12px;
       margin-bottom: 15px;
     }
-    .back-btn {
+    .back-btn,
+    .order-btn {
       display: inline-block;
       margin-top: 20px;
-      padding: 10px 20px;
-      background: #0078ff;
+      padding: 12px 20px;
+      background: #00aaff;
       border-radius: 8px;
       color: #fff;
+      text-align: center;
       text-decoration: none;
       cursor: pointer;
+      transition: background 0.2s;
     }
-    .back-btn:hover {
-      background: #005fcc;
+    .back-btn:hover,
+    .order-btn:hover {
+      background: #0088cc;
     }
   </style>
 </head>
@@ -60,19 +64,17 @@
   <div class="container" id="menuContainer">
     <h1>Мои кейсы</h1>
     <ul id="caseList"></ul>
+    <!-- Кнопка для заказа бота -->
+    <a href="https://t.me/AlenWolker" class="order-btn" target="_blank">Заказать бота</a>
   </div>
-
-  <div class="container detail" id="detailContainer" style="display:none;">
-    <!-- Здесь будет динамический контент -->
-  </div>
+  <div class="container detail" id="detailContainer" style="display:none;"></div>
 
   <script>
-    // Массив кейсов: заголовок, краткое описание, полное описание (HTML) и картинка
     const cases = [
       {
         title: "Чат‑бот Платный клуб",
         shortDesc: "Платный вход и рекуррентные платежи.",
-        image: "https://static.tildacdn.com/tild6535-6266-4633-b834-633865666234/startup_landing.jpg",
+        image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=60",
         fullHtml: `
           <p><strong>Задача:</strong> автоматизировать оплату клуба и направлять старых участников в воронку, учитывая дату окончания подписки.</p>
           <p><strong>Инсайты:</strong> почти 1000 человек ежемесячно оплачивают клуб и присылают чек вручную; треть оплачивает сразу 3–6 месяцев; каждый месяц создаётся новый канал для платников; используются акции и пробные периоды 3–7 дней; платежи приходят из России и Европы; заказчик хочет иметь возможность быстро менять воронку.</p>
@@ -83,7 +85,7 @@
       {
         title: "Чат‑бот Таролога",
         shortDesc: "Лид‑магнит и база из 10 000+ пользователей.",
-        image: "https://static.tildacdn.com/tild3862-3837-4238-b536-383433346466/shop_case.jpg",
+        image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=800&q=60",
         fullHtml: `
           <p><strong>Задача:</strong> собрать базу клиентов и выдать лид‑магнит для услуги таролога.</p>
           <p><strong>Решение:</strong> разработали чат‑бот, который выдаёт бесплатный материал (лид‑магнит), собирает контактные данные и перенаправляет пользователей на консультацию; бот отвечает на частые вопросы по таро и подсказывает, как записаться.</p>
@@ -93,7 +95,7 @@
       {
         title: "Чат‑бот Авто вебинар",
         shortDesc: "Автоматические рассылки для повышения посещаемости.",
-        image: "https://thb.tildacdn.pub/tild6439-3130-4662-b861-663566666638/-/empty/photo.PNG",
+        image: "https://images.unsplash.com/photo-1558889414-b3af4e4f3e8b?auto=format&fit=crop&w=800&q=60",
         fullHtml: `
           <p><strong>Задача:</strong> увеличить посещаемость авто‑вебинара для психолога.</p>
           <p><strong>Решение:</strong> создали бот на Salebot.pro, который выдаёт лид‑магнит (вебинар), отправляет напоминания за час, за 15 минут до начала, в момент старта и спустя 15 минут, если пользователь не присоединился; бот собирает и передаёт данные в CRM и формирует аналитику.</p>
@@ -103,7 +105,7 @@
       {
         title: "Чат‑бот Репетитор по литературе",
         shortDesc: "Интерактивная подготовка к ЕГЭ по литературе.",
-        image: "https://static.tildacdn.com/tild6666-6164-4438-a532-386434366665/event_case.jpg",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=60",
         fullHtml: `
           <p><strong>Задача:</strong> создать бота для подготовки учеников к ЕГЭ по литературе, который отправляет задания из Google Sheets в соответствии с изученными темами.</p>
           <p><strong>Решение:</strong> интегрировали бота с Google Sheets для автоматической выгрузки вопросов; реализовали алгоритм проверки ответов, учитывающий особенности русского языка и допускающий вариации; добавили ИИ‑ассистента, который общается со студентами, задаёт дополнительные вопросы и помогает глубже понять материал.</p>
@@ -112,34 +114,34 @@
       }
     ];
 
-    // выводим список кейсов
-    const listEl = document.getElementById("caseList");
+    const listEl = document.getElementById('caseList');
+
     cases.forEach((c, index) => {
-      const li = document.createElement("li");
+      const li = document.createElement('li');
       li.textContent = `${c.title} — ${c.shortDesc}`;
       li.onclick = () => showDetail(index);
       listEl.appendChild(li);
     });
 
-    // показываем детали
     function showDetail(i) {
       const detail = cases[i];
-      const detailContainer = document.getElementById("detailContainer");
+      const detailContainer = document.getElementById('detailContainer');
       detailContainer.innerHTML = `
         <h1>${detail.title}</h1>
         <img src="${detail.image}" alt="${detail.title}">
         ${detail.fullHtml}
         <div class="back-btn" onclick="backToMenu()">Назад к кейсам</div>
+        <a href="https://t.me/AlenWolker" class="order-btn" target="_blank">Заказать бота</a>
       `;
-      document.getElementById("menuContainer").style.display = "none";
-      detailContainer.style.display = "block";
+      document.getElementById('menuContainer').style.display = 'none';
+      detailContainer.style.display = 'block';
     }
 
-    // возвращаемся к списку
     function backToMenu() {
-      document.getElementById("detailContainer").style.display = "none";
-      document.getElementById("menuContainer").style.display = "block";
+      document.getElementById('detailContainer').style.display = 'none';
+      document.getElementById('menuContainer').style.display = 'block';
     }
   </script>
 </body>
 </html>
+
