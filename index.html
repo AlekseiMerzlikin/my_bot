@@ -3,110 +3,143 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио кейсов</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Мои кейсы</title>
   <style>
-    :root {
-      --bg-color: #0d1117;
-      --card-bg: #161b22;
-      --accent: #0078ff;
-      --text-color: #ffffff;
-      --subtext-color: #cccccc;
-    }
     body {
       margin: 0;
-      padding: 20px;
-      font-family: 'Montserrat', sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
-    }
-    #menuContainer, #detailContainer {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .case-item {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 15px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .case-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    h2 {
-      margin: 0 0 5px;
-      font-size: 20px;
-    }
-    p {
-      margin: 0;
-      color: var(--subtext-color);
-    }
-    .back-button {
-      margin-top: 20px;
-      display: inline-block;
-      background: var(--accent);
+      font-family: "Montserrat", sans-serif;
+      background-color: #0d1117;
       color: #fff;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      background: #161b22;
+      padding: 15px 20px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    li:hover {
+      background: #21262d;
+    }
+    .detail img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
       padding: 10px 20px;
+      background: #0078ff;
       border-radius: 8px;
+      color: #fff;
       text-decoration: none;
       cursor: pointer;
+    }
+    .back-btn:hover {
+      background: #005fcc;
     }
   </style>
 </head>
 <body>
-  <div id="menuContainer"></div>
-  <div id="detailContainer" style="display:none;"></div>
+  <div class="container" id="menuContainer">
+    <h1>Мои кейсы</h1>
+    <ul id="caseList"></ul>
+  </div>
+
+  <div class="container detail" id="detailContainer" style="display:none;">
+    <!-- Здесь будет динамический контент -->
+  </div>
 
   <script>
-    // apply Telegram theme if available
-    function applyTelegramTheme() {
-      if (window?.Telegram?.WebApp?.themeParams) {
-        const tp = window.Telegram.WebApp.themeParams;
-        if (tp.bg_color) document.documentElement.style.setProperty('--bg-color', '#' + tp.bg_color);
-        if (tp.secondary_bg_color) document.documentElement.style.setProperty('--card-bg', '#' + tp.secondary_bg_color);
-        if (tp.button_color) document.documentElement.style.setProperty('--accent', '#' + tp.button_color);
-        if (tp.text_color) document.documentElement.style.setProperty('--text-color', '#' + tp.text_color);
-        if (tp.hint_color) document.documentElement.style.setProperty('--subtext-color', '#' + tp.hint_color);
-      }
-    }
-    applyTelegramTheme();
-
+    // Массив кейсов: заголовок, краткое описание, полное описание (HTML) и картинка
     const cases = [
-      { title: "Чат-бот Платный клуб", description: "Платный вход и рекуррентные платежи." },
-      { title: "Чат-бот Таролога", description: "Более 10000 пользователей на выдачу лид-магнита." },
-      { title: "Чат-бот Авто вебинар", description: "Автоматические рассылки, прогрев аудитории." },
-      { title: "Чат-бот Репетитор по литературе", description: "Чат бот с системой ИИ." }
+      {
+        title: "Чат‑бот Платный клуб",
+        shortDesc: "Платный вход и рекуррентные платежи.",
+        image: "https://static.tildacdn.com/tild6535-6266-4633-b834-633865666234/startup_landing.jpg",
+        fullHtml: `
+          <p><strong>Задача:</strong> автоматизировать оплату клуба и направлять старых участников в воронку, учитывая дату окончания подписки.</p>
+          <p><strong>Инсайты:</strong> почти 1000 человек ежемесячно оплачивают клуб и присылают чек вручную; треть оплачивает сразу 3–6 месяцев; каждый месяц создаётся новый канал для платников; используются акции и пробные периоды 3–7 дней; платежи приходят из России и Европы; заказчик хочет иметь возможность быстро менять воронку.</p>
+          <p><strong>Решение:</strong> разработали 6 уникальных ссылок для старых участников, которые ведут в новый канал; подключили сервис оплаты Прода́мус; разделили воронку для России и Европы (поддержаны системы Lava и YooKassa); реализовали напоминания об окончании подписки; предусмотрели разные длительности подписки (1, 3, 6 месяцев).</p>
+          <p><strong>Результат:</strong> за две недели 1603 человека оформили подписку, а рутинная работа по ручному подтверждению оплат сократилась.</p>
+        `
+      },
+      {
+        title: "Чат‑бот Таролога",
+        shortDesc: "Лид‑магнит и база из 10 000+ пользователей.",
+        image: "https://static.tildacdn.com/tild3862-3837-4238-b536-383433346466/shop_case.jpg",
+        fullHtml: `
+          <p><strong>Задача:</strong> собрать базу клиентов и выдать лид‑магнит для услуги таролога.</p>
+          <p><strong>Решение:</strong> разработали чат‑бот, который выдаёт бесплатный материал (лид‑магнит), собирает контактные данные и перенаправляет пользователей на консультацию; бот отвечает на частые вопросы по таро и подсказывает, как записаться.</p>
+          <p><strong>Результат:</strong> более 10 000 пользователей получили лид‑магнит и подписались на рассылку, что помогло значительно увеличить клиентскую базу специалиста.</p>
+        `
+      },
+      {
+        title: "Чат‑бот Авто вебинар",
+        shortDesc: "Автоматические рассылки для повышения посещаемости.",
+        image: "https://thb.tildacdn.pub/tild6439-3130-4662-b861-663566666638/-/empty/photo.PNG",
+        fullHtml: `
+          <p><strong>Задача:</strong> увеличить посещаемость авто‑вебинара для психолога.</p>
+          <p><strong>Решение:</strong> создали бот на Salebot.pro, который выдаёт лид‑магнит (вебинар), отправляет напоминания за час, за 15 минут до начала, в момент старта и спустя 15 минут, если пользователь не присоединился; бот собирает и передаёт данные в CRM и формирует аналитику.</p>
+          <p><strong>Результат:</strong> посещаемость вебинаров выросла, а процесс отправки напоминаний стал полностью автоматизирован.</p>
+        `
+      },
+      {
+        title: "Чат‑бот Репетитор по литературе",
+        shortDesc: "Интерактивная подготовка к ЕГЭ по литературе.",
+        image: "https://static.tildacdn.com/tild6666-6164-4438-a532-386434366665/event_case.jpg",
+        fullHtml: `
+          <p><strong>Задача:</strong> создать бота для подготовки учеников к ЕГЭ по литературе, который отправляет задания из Google Sheets в соответствии с изученными темами.</p>
+          <p><strong>Решение:</strong> интегрировали бота с Google Sheets для автоматической выгрузки вопросов; реализовали алгоритм проверки ответов, учитывающий особенности русского языка и допускающий вариации; добавили ИИ‑ассистента, который общается со студентами, задаёт дополнительные вопросы и помогает глубже понять материал.</p>
+          <p><strong>Результат:</strong> ученики получают персонализированные задания, а репетитор экономит время на подборе вопросов и проверке ответов. ИИ‑ассистент делает процесс обучения более интерактивным.</p>
+        `
+      }
     ];
 
-    const menuContainer = document.getElementById('menuContainer');
-    const detailContainer = document.getElementById('detailContainer');
+    // выводим список кейсов
+    const listEl = document.getElementById("caseList");
+    cases.forEach((c, index) => {
+      const li = document.createElement("li");
+      li.textContent = `${c.title} — ${c.shortDesc}`;
+      li.onclick = () => showDetail(index);
+      listEl.appendChild(li);
+    });
 
-    function renderMenu() {
-      menuContainer.innerHTML = '';
-      cases.forEach((c, index) => {
-        const div = document.createElement('div');
-        div.className = 'case-item';
-        div.innerHTML = '<h2>' + c.title + '</h2><p>' + c.description + '</p>';
-        div.addEventListener('click', () => showCase(index));
-        menuContainer.appendChild(div);
-      });
-      menuContainer.style.display = 'block';
-      detailContainer.style.display = 'none';
+    // показываем детали
+    function showDetail(i) {
+      const detail = cases[i];
+      const detailContainer = document.getElementById("detailContainer");
+      detailContainer.innerHTML = `
+        <h1>${detail.title}</h1>
+        <img src="${detail.image}" alt="${detail.title}">
+        ${detail.fullHtml}
+        <div class="back-btn" onclick="backToMenu()">Назад к кейсам</div>
+      `;
+      document.getElementById("menuContainer").style.display = "none";
+      detailContainer.style.display = "block";
     }
 
-    function showCase(index) {
-      const c = cases[index];
-      detailContainer.innerHTML = '<h2>' + c.title + '</h2><p>' + c.description + '</p><div class="back-button" onclick="renderMenu()">Назад к кейсам</div>';
-      menuContainer.style.display = 'none';
-      detailContainer.style.display = 'block';
+    // возвращаемся к списку
+    function backToMenu() {
+      document.getElementById("detailContainer").style.display = "none";
+      document.getElementById("menuContainer").style.display = "block";
     }
-
-    renderMenu();
   </script>
 </body>
 </html>
